@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", ui-serif, Georgia, serif;
+  
+  --color-gold-400: #D4AF37;
+  --color-gold-500: #C5A880;
+  --color-gold-600: #B3956D;
+
+  --color-sand-50: #FDFCFB;
+  --color-sand-100: #F9F8F6;
+  --color-sand-200: #F1EFEA;
+  --color-sand-300: #D8D4CB;
+  --color-sand-400: #B8B2A6;
+  --color-sand-500: #8A8277;
+  --color-sand-600: #6B6358;
+  --color-sand-700: #524D44;
+  --color-sand-800: #3E3B35;
+  --color-sand-900: #2C2A26;
+
+  --color-dark-900: #121212;
+  --color-dark-800: #1C1C1C;
+  --color-dark-700: #2D2D2D;
+}
+
+@custom-variant dark (&:is(.dark *));
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+    overflow-x: hidden;
+  }
+
+  body {
+    @apply font-sans antialiased bg-sand-50 text-sand-900 transition-colors duration-500;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    min-height: 100dvh;
+  }
+
+  * {
+    -webkit-tap-highlight-color: transparent;
+    min-height: 0;
+  }
+
+  button, a {
+    touch-action: manipulation;
+  }
+
+  body.dark {
+    @apply bg-dark-900 text-sand-50;
+  }
+
+  ::selection {
+    @apply bg-gold-500/30 text-current;
+  }
+}
+
+/* Custom Scrollbar for a premium feel */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-sand-200 rounded-full;
+}
+.dark ::-webkit-scrollbar-thumb {
+  @apply bg-dark-700;
+}
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gold-500;
+}
