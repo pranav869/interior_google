@@ -3,10 +3,12 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useEffect, useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { ArrowUp } from 'lucide-react';
 import Lenis from 'lenis';
+import { Admin } from './pages/Admin';
 import { Loader } from './components/Loader';
 import { CustomCursor } from './components/CustomCursor';
 import { Navigation } from './components/Navigation';
@@ -17,6 +19,8 @@ import { Portfolio } from './components/sections/Portfolio';
 import { Process } from './components/sections/Process';
 import { Testimonials } from './components/sections/Testimonials';
 import { WhyChooseUs } from './components/sections/WhyChooseUs';
+import { TrustedPartners } from './components/sections/TrustedPartners';
+import { ProjectVideos } from './components/sections/ProjectVideos';
 import { CtaBanner } from './components/sections/CtaBanner';
 import { Contact } from './components/sections/Contact';
 import { Footer } from './components/Footer';
@@ -72,7 +76,7 @@ function useLenis() {
   }, []);
 }
 
-export default function App() {
+function MainSite() {
   useLenis();
   return (
     <>
@@ -87,7 +91,9 @@ export default function App() {
         <Portfolio />
         <Process />
         <Testimonials />
+        <ProjectVideos />
         <WhyChooseUs />
+        <TrustedPartners />
         <CtaBanner />
         <Contact />
       </main>
@@ -95,5 +101,16 @@ export default function App() {
       <Footer />
       <ScrollToTop />
     </>
+  );
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/admin" element={<Admin />} />
+        <Route path="*" element={<MainSite />} />
+      </Routes>
+    </BrowserRouter>
   );
 }

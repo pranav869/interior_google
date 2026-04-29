@@ -73,7 +73,9 @@ export function Navigation() {
                   className={`text-sm tracking-widest uppercase transition-colors ${
                     activeSection === link.id
                       ? 'text-gold-500'
-                      : 'text-sand-800 dark:text-sand-200 hover:text-gold-500 dark:hover:text-gold-500'
+                      : isScrolled
+                        ? 'text-sand-800 dark:text-sand-200 hover:text-gold-500 dark:hover:text-gold-500'
+                        : 'text-white/90 hover:text-white'
                   }`}
                 >
                   {link.name}
@@ -89,17 +91,21 @@ export function Navigation() {
             ))}
           </ul>
           
-          <div className="flex items-center space-x-6 pl-6 border-l border-sand-200 dark:border-dark-700">
+          <div className={`flex items-center space-x-6 pl-6 border-l transition-colors duration-300 ${isScrolled ? 'border-sand-200 dark:border-dark-700' : 'border-white/20'}`}>
             <button 
               onClick={toggleTheme}
-              className="text-sand-800 dark:text-sand-200 hover:text-gold-500 transition-colors"
+              className={`hover:text-gold-500 transition-colors ${isScrolled ? 'text-sand-800 dark:text-sand-200' : 'text-white/90 hover:text-white'}`}
               aria-label="Toggle Dark Mode"
             >
               {isDark ? <Sun size={20} className="font-light" /> : <Moon size={20} className="font-light" />}
             </button>
             <a 
-              href="#contact" 
-              className="border border-sand-900 dark:border-sand-50 px-6 py-2 text-sm tracking-widest uppercase hover:bg-sand-900 hover:text-sand-50 dark:hover:bg-sand-50 dark:hover:text-dark-900 transition-all duration-300"
+              href="#contact"
+              className={`px-6 py-2 text-sm tracking-widest uppercase transition-all duration-300 ${
+                isScrolled
+                  ? 'border border-sand-900 dark:border-sand-50 hover:bg-sand-900 hover:text-sand-50 dark:hover:bg-sand-50 dark:hover:text-dark-900'
+                  : 'border border-white/70 text-white hover:bg-white hover:text-sand-900'
+              }`}
             >
               Consult
             </a>

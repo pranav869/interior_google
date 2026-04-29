@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import type { FormEvent, ChangeEvent } from 'react';
+import { supabase } from '../../lib/supabase';
 import { motion, AnimatePresence } from 'motion/react';
 import { MapPin, Phone, Mail, MessageCircle, CheckCircle, Clock } from 'lucide-react';
 
@@ -8,13 +9,28 @@ export function Contact() {
     name: '', phone: '', email: '', projectType: '', budget: '', message: ''
   });
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState('');
+  const [submitting, setSubmitting] = useState(false);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     setFormData(prev => ({ ...prev, [e.target.id]: e.target.value }));
   };
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    setSubmitting(true);
+    setSubmitError('');
+    const { error } = await supabase.from('bookings').insert({
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone || null,
+      project_type: formData.projectType || null,
+      budget: formData.budget || null,
+      message: formData.message || null,
+      status: 'new',
+    });
+    setSubmitting(false);
+    if (error) { console.error('Supabase insert error:', error); setSubmitError(`Error: ${error.message}`); return; }
     setSubmitted(true);
   };
 
@@ -179,9 +195,9 @@ export function Contact() {
                             className="w-full bg-transparent border-b border-sand-300 dark:border-dark-700 py-2 focus:outline-none focus:border-gold-500 transition-colors text-sand-900 dark:text-sand-50 text-sm font-light appearance-none"
                           >
                             <option value="" className="dark:bg-dark-800">Select...</option>
-                            <option value="tier1" className="dark:bg-dark-800">£50K – £200K</option>
-                            <option value="tier2" className="dark:bg-dark-800">£200K – £1M</option>
-                            <option value="tier3" className="dark:bg-dark-800">£1M+</option>
+                            <option value="tier1" className="dark:bg-dark-800">₹5L – ₹25L</option>
+                            <option value="tier2" className="dark:bg-dark-800">₹25L – ₹1Cr</option>
+                            <option value="tier3" className="dark:bg-dark-800">₹1Cr+</option>
                           </select>
                         </div>
                       </div>
@@ -194,10 +210,13 @@ export function Contact() {
                       </div>
                     </div>
 
-                    <button type="submit"
-                      className="w-full bg-sand-900 text-sand-50 dark:bg-sand-50 dark:text-dark-900 py-4 uppercase tracking-widest text-sm hover:bg-gold-500 hover:text-white dark:hover:bg-gold-500 dark:hover:text-white transition-colors duration-300 mt-4"
+                    {submitError && (
+                      <p className="text-red-500 text-xs mt-1">{submitError}</p>
+                    )}
+                    <button type="submit" disabled={submitting}
+                      className="w-full bg-sand-900 text-sand-50 dark:bg-sand-50 dark:text-dark-900 py-4 uppercase tracking-widest text-sm hover:bg-gold-500 hover:text-white dark:hover:bg-gold-500 dark:hover:text-white transition-colors duration-300 mt-4 disabled:opacity-60 disabled:cursor-not-allowed"
                     >
-                      Submit Inquiry
+                      {submitting ? 'Submitting…' : 'Submit Inquiry'}
                     </button>
                   </form>
                 </motion.div>
