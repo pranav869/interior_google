@@ -54,14 +54,14 @@ export function About() {
             <div className="aspect-[3/4] overflow-hidden relative group">
               <img
                 src="/ceo.png"
-                alt="Eleanor Vance, Principal Designer & Founder"
+                alt="Venkat, Principal Designer & Founder"
                 className="w-full h-full object-cover object-top saturate-[0.8] group-hover:saturate-100 group-hover:scale-105 transition-all duration-1000"
               />
               {/* Warm luxury overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-sand-900/60 via-sand-800/10 to-transparent" />
               {/* Name badge */}
               <div className="absolute bottom-0 left-0 right-0 px-6 py-5">
-                <p className="font-serif text-lg italic text-white">Eleanor Vance</p>
+                <p className="font-serif text-lg italic text-white">Venkat</p>
                 <p className="text-[10px] uppercase tracking-[0.25em] text-white/60 mt-0.5">Principal Designer &amp; Founder</p>
               </div>
             </div>
