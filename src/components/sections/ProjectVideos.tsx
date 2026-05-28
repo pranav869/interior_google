@@ -1,4 +1,4 @@
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 
 const videos = [
   { id: 'H9gMqZiFCrI', title: 'Project Showcase' },

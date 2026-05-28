@@ -1,4 +1,4 @@
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import { ShieldCheck, Gem, BarChart3 } from 'lucide-react';
 
 const reasons = [

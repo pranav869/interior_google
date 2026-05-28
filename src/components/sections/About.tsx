@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { motion, useInView } from 'motion/react';
+import { motion, useInView } from 'framer-motion';
 
 const stats = [
   { value: 15, suffix: '+', label: 'Years of Excellence' },

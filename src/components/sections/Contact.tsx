@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import type { FormEvent, ChangeEvent } from 'react';
 import { supabase } from '../../lib/supabase';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { MapPin, Phone, Mail, MessageCircle, CheckCircle, Clock } from 'lucide-react';
 
 export function Contact() {

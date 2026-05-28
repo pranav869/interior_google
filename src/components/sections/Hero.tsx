@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import type { MouseEvent } from 'react';
-import { motion, useMotionValue, useTransform, useSpring } from 'motion/react';
+import { motion, useMotionValue, useTransform, useSpring } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 
 const heroStats = [

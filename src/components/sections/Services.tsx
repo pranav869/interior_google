@@ -1,4 +1,4 @@
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import { Home, Briefcase, Hammer, Box, ArrowRight } from 'lucide-react';
 
 const services = [
